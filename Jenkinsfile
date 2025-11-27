@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/YOUR_GITHUB_USERNAME/jenkins-docker-fullstack.git'
+                    url: 'https://github.com/Janakiraman0207/jenkins-docker-fullstack.git'
             }
         }
 
@@ -18,7 +18,7 @@ pipeline {
             steps {
                 sh '''
                     cd backend
-                    docker build -t YOUR_DOCKER_USERNAME/backend-app:latest .
+                    docker build -t janakiraman0207/backend-app:latest .
                 '''
             }
         }
@@ -27,7 +27,7 @@ pipeline {
             steps {
                 sh '''
                     cd frontend
-                    docker build -t YOUR_DOCKER_USERNAME/frontend-app:latest .
+                    docker build -t janakiraman0207/frontend-app:latest .
                 '''
             }
         }
@@ -43,8 +43,8 @@ pipeline {
         stage('Push Docker Images') {
             steps {
                 sh '''
-                    docker push YOUR_DOCKER_USERNAME/backend-app:latest
-                    docker push YOUR_DOCKER_USERNAME/frontend-app:latest
+                    docker push janakiraman0207/backend-app:latest
+                    docker push janakiraman0207/frontend-app:latest
                 '''
             }
         }
@@ -57,8 +57,8 @@ pipeline {
                     docker stop frontend || true
                     docker rm frontend || true
 
-                    docker run -d -p 5000:5000 --name backend YOUR_DOCKER_USERNAME/backend-app:latest
-                    docker run -d -p 80:80 --name frontend YOUR_DOCKER_USERNAME/frontend-app:latest
+                    docker run -d -p 5000:5000 --name backend janakiraman0207/backend-app:latest
+                    docker run -d -p 80:80 --name frontend janakiraman0207/frontend-app:latest
                 '''
             }
         }
